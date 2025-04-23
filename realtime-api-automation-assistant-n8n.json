@@ -1,0 +1,26 @@
+{
+  "name": "Realtime API Automation Assistant",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "gateway:CustomWebHook_1",
+      "type": "makecom.gateway:CustomWebHook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "builtin:BasicRouter_4",
+      "type": "makecom.builtin:BasicRouter",
+      "typeVersion": 1,
+      "position": [
+        400,
+        300
+      ]
+    }
+  ],
+  "connections": {}
+}
