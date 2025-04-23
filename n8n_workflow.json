@@ -1,0 +1,66 @@
+{
+  "name": "AI Google Sheets Webhook Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ai-webhook"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {},
+      "name": "Router",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "operation": "lookup",
+        "sheetId": "your-sheet-id",
+        "range": "Sheet1!A1:Z100"
+      },
+      "name": "Google Sheets Search Rows",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [600, 100]
+    },
+    {
+      "parameters": {
+        "resource": "completion",
+        "model": "gpt-3.5-turbo",
+        "prompt": "Use the searched rows to generate a response."
+      },
+      "name": "OpenAI 1",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [800, 100]
+    },
+    {
+      "parameters": {
+        "responseMode": "lastNode"
+      },
+      "name": "Webhook Response 1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1000, 100]
+    },
+    {
+      "parameters": {
+        "resource": "completion",
+        "model": "gpt-3.5-turbo",
+        "prompt": "Generate content and store in Google Sheets"
+      },
+      "name": "OpenAI 2",
+      "type": "n8n-nodes-base.openai",
+      "typeVersion": 1,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "your-sheet-id",
+        "range":
